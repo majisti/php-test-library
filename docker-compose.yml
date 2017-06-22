@@ -1,0 +1,12 @@
+php:
+    build: docker/php/cli
+    environment:
+        PHP_IDE_CONFIG: serverName=MAJISTI_TEST_LIBRARY
+    volumes_from:
+        - data
+
+data:
+    image: busybox
+    volumes:
+        - .:/var/www/html
+        - ~/.composer:/var/www/.composer

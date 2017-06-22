@@ -1,0 +1,5 @@
+/vendor/
+/bin/
+/composer.phar
+/docker/docker-compose.override.yml
+/.idea/
