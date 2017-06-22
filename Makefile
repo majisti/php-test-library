@@ -25,7 +25,7 @@ PHP=$(DC) run --rm php
 COMPOSER=$(PHP) php -n -d extension=zip.so -d memory_limit=-1 composer.phar
 
 all: configure composer-install init vendors-install
-database-reload: schema-update fixtures-load
+database-reload: database-drop database-create schema-update fixtures-load
 lint: lint-fix
 test: test-unit test-component test-functional test-acceptance
 test-without-acceptance: test-unit test-component test-functional
@@ -70,6 +70,9 @@ composer-install:
 
 composer-dump-autoload:
 	$(COMPOSER) dump-autoload
+
+database-drop:
+	$(PHP) php bin/console -v doctrine:database:drop --force
 
 database-create:
 	$(PHP) php bin/console -v doctrine:database:create

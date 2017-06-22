@@ -1,0 +1,25 @@
+framework:
+    secret: "12345"
+    default_locale: en
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   pdo_sqlite
+        host:     localhost
+        port:     ~
+        path:     '%kernel.root_dir%/../var/db.sqlite'
+        charset:  UTF8
+
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+
+hautelook_alice:
+    db_drivers:
+        orm: ~
+    locale: en
+    seed: 1
+    persist_once: false
+    loading_limit: 5

@@ -1,5 +1,7 @@
 /vendor/
 /bin/
+/var/
 /composer.phar
 /docker/docker-compose.override.yml
 /.idea/
+db.sqlite

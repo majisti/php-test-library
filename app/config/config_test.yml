@@ -1,0 +1,12 @@
+imports:
+    - { resource: config_dev.yml }
+    - { resource: services_test.yml }
+
+framework:
+    test: ~
+
+doctrine:
+    dbal:
+        driver: pdo_sqlite
+        host: localhost
+        path: '%kernel.root_dir%/../tests/_data/db.sqlite'

@@ -4,8 +4,6 @@ namespace Majisti\Testing;
 
 use Hamcrest\MatcherAssert;
 
-require_once __DIR__.'/../../../vendor/hamcrest/hamcrest-php/hamcrest/Hamcrest.php';
-
 /**
  * @author Steven Rosato <steven.rosato@majisti.com>
  */
