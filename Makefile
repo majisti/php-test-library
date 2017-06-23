@@ -27,8 +27,7 @@ COMPOSER=$(PHP) php -n -d extension=zip.so -d memory_limit=-1 composer.phar
 all: configure composer-install init vendors-install
 database-reload: database-drop database-create schema-update fixtures-load
 lint: lint-fix
-test: test-unit test-component test-functional test-acceptance
-test-without-acceptance: test-unit test-component test-functional
+test: test-unit test-component test-functional
 
 configure:
 	cp -n docker/docker-compose.override.yml.dist docker/docker-compose.override.yml
@@ -98,18 +97,6 @@ vendors-install-prod:
 
 vendors-update:
 	$(COMPOSER) update
-
-test-acceptance:
-	$(PHP) php vendor/behat/behat/bin/behat -v -p firefox
-
-test-acceptance-browserkit:
-	$(PHP) php vendor/behat/behat/bin/behat -v
-
-test-acceptance-chrome:
-	$(PHP) php vendor/behat/behat/bin/behat -v -p chrome
-
-test-acceptance-debug:
-	$(DC) run --rm -e XDEBUG=1 php vendor/behat/behat/bin/behat -v -p firefox
 
 test-functional:
 	$(PHP) php vendor/phpunit/phpunit/phpunit -v tests/Functional

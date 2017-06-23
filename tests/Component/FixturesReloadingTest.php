@@ -16,10 +16,11 @@ class FixturesReloadingTest extends ComponentTest
 
         $this->verifyThat(count($repo->findAll()), is(greaterThan(0)));
 
-        $queryBuilder = $repo->createQueryBuilder('p');
-        $queryBuilder->delete();
-
-        $queryBuilder->getQuery()->execute();
+        $repo->createQueryBuilder('p')
+            ->delete()
+            ->getQuery()
+            ->execute()
+        ;
 
         $this->verifyThat(count($repo->findAll()), is(0));
     }

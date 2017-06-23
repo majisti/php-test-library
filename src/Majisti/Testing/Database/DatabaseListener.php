@@ -104,7 +104,7 @@ class DatabaseListener implements TestListener
      */
     public function startTest(PHPUnit_Framework_Test $test)
     {
-        if ($test instanceof KernelTestCase ) {
+        if ($test instanceof KernelTestCase && !$test->isSkippingKernelBooting()) {
             $this->createDatabaseHelper($this->getBootedKernel($test))->beforeTest($test);
         }
     }

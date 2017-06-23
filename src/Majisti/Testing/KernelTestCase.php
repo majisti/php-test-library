@@ -8,16 +8,25 @@ abstract class KernelTestCase extends BaseKernelTestCase
 {
     use Hamcrest;
 
+    protected $skipKernelBoot = false;
+
     public static function setUpBeforeClass()
     {
         static::$kernel = static::createKernel();
+    }
+
+    public function isSkippingKernelBooting()
+    {
+        return $this->skipKernelBoot;
     }
 
     protected function setUp()
     {
         parent::setUp();
 
-        $this->getKernel()->boot();
+        if (!$this->skipKernelBoot) {
+            $this->getKernel()->boot();
+        }
     }
 
     public function getKernel()
