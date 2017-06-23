@@ -81,6 +81,7 @@ schema-update:
 
 fixtures-load:
 	$(PHP) php bin/console -v --no-interaction hautelook_alice:doctrine:fixtures:load
+	$(PHP) php bin/console -v --no-interaction doctrine:fixtures:load --fixtures src/AppBundle/DataFixtures/ORM/Doctrine --append
 
 lint:
 	$(PHP) php -n bin/php-cs-fixer fix --no-interaction --dry-run --diff -vvv

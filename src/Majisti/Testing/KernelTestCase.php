@@ -4,7 +4,7 @@ namespace Majisti\Testing;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase as BaseKernelTestCase;
 
-abstract class KernelTestCase extends BaseKernelTestCase
+abstract class KernelTestCase extends BaseKernelTestCase implements KernelAwareTest
 {
     use Hamcrest;
 

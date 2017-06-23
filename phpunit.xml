@@ -13,7 +13,10 @@
     </php>
 
     <listeners>
-        <listener class="Majisti\Testing\Database\DatabaseListener" file="src/Majisti/Testing/Database/DatabaseListener.php" />
+        <listener
+            class="Majisti\Testing\TestFrameworkIntegration\PhpUnit\DatabaseHelperListener"
+            file="src/Majisti/Testing/TestFrameworkIntegration/PhpUnit/DatabaseHelperListener.php"
+        />
     </listeners>
 
     <testsuites>

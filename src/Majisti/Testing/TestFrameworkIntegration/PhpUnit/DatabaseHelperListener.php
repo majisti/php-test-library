@@ -1,21 +1,22 @@
 <?php
 
-namespace Majisti\Testing\Database;
+namespace Majisti\Testing\TestFrameworkIntegration\PhpUnit;
 
 use Exception;
+use Majisti\Testing\Database\DatabaseHelper;
+use Majisti\Testing\KernelAwareTest;
 use PHPUnit\Framework\TestListener;
 use PHPUnit_Framework_AssertionFailedError;
 use PHPUnit_Framework_Test;
 use PHPUnit_Framework_TestSuite;
 use Symfony\Component\HttpKernel\KernelInterface;
-use Majisti\Testing\KernelTestCase;
 
 /**
  * Will help with fixtures reloading for tests supporting fixtures with a Symfony Kernel.
  *
  * @author Steven Rosato
  */
-class DatabaseListener implements TestListener
+class DatabaseHelperListener implements TestListener
 {
     /**
      * An error occurred.
@@ -97,7 +98,7 @@ class DatabaseListener implements TestListener
      */
     public function startTest(PHPUnit_Framework_Test $test)
     {
-        if ($test instanceof KernelTestCase && !$test->isSkippingKernelBooting()) {
+        if ($test instanceof KernelAwareTest && !$test->isSkippingKernelBooting()) {
             $this->createDatabaseHelper($this->getBootedKernel($test))->beforeTest($test);
         }
     }
@@ -120,7 +121,7 @@ class DatabaseListener implements TestListener
         return $databaseHelper;
     }
 
-    private function getBootedKernel(KernelTestCase $test)
+    private function getBootedKernel(KernelAwareTest $test)
     {
         $kernel = $test->getKernel();
         $kernel->boot();
