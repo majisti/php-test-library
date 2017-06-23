@@ -11,7 +11,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Majisti\Testing\KernelTestCase;
 
 /**
- * Will help with fixtures reloading for tests supporting fixtures with a Symfony Kernel
+ * Will help with fixtures reloading for tests supporting fixtures with a Symfony Kernel.
  *
  * @author Steven Rosato
  */
@@ -26,7 +26,6 @@ class DatabaseListener implements TestListener
      */
     public function addError(PHPUnit_Framework_Test $test, Exception $e, $time)
     {
-
     }
 
     /**
@@ -38,7 +37,6 @@ class DatabaseListener implements TestListener
      */
     public function addFailure(PHPUnit_Framework_Test $test, PHPUnit_Framework_AssertionFailedError $e, $time)
     {
-
     }
 
     /**
@@ -50,7 +48,6 @@ class DatabaseListener implements TestListener
      */
     public function addIncompleteTest(PHPUnit_Framework_Test $test, Exception $e, $time)
     {
-
     }
 
     /**
@@ -62,7 +59,6 @@ class DatabaseListener implements TestListener
      */
     public function addRiskyTest(PHPUnit_Framework_Test $test, Exception $e, $time)
     {
-
     }
 
     /**
@@ -74,7 +70,6 @@ class DatabaseListener implements TestListener
      */
     public function addSkippedTest(PHPUnit_Framework_Test $test, Exception $e, $time)
     {
-
     }
 
     /**
@@ -84,7 +79,6 @@ class DatabaseListener implements TestListener
      */
     public function startTestSuite(PHPUnit_Framework_TestSuite $suite)
     {
-
     }
 
     /**
@@ -94,7 +88,6 @@ class DatabaseListener implements TestListener
      */
     public function endTestSuite(PHPUnit_Framework_TestSuite $suite)
     {
-
     }
 
     /**

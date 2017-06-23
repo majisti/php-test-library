@@ -14,6 +14,7 @@ class Profile
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
      * @var int
      */
     private $id;
@@ -60,6 +61,7 @@ class Profile
     public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
+
         return $this;
     }
 
@@ -79,6 +81,7 @@ class Profile
     public function setLastName($lastName)
     {
         $this->lastName = $lastName;
+
         return $this;
     }
 

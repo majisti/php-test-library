@@ -88,7 +88,7 @@ class DatabaseHelper
                 $loaderGenerator->generate($loader, $fixturesLoader, $this->getKernel()->getBundles(), $this->getKernel()->getEnvironment()),
                 $this->aliceFixturesList,
                 false, //FIXME: should be true
-                function() {},
+                function () {},
                 false
             );
         }

@@ -14,18 +14,21 @@ class User
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
      * @var int
      */
     private $id;
 
     /**
      * @ORM\Column(name="username", unique=true, type="string")
+     *
      * @var string
      */
     private $username;
 
     /**
      * @ORM\Column(name="email", unique=true, type="string")
+     *
      * @var string
      */
     private $email;
@@ -60,6 +63,7 @@ class User
     public function setUsername($username)
     {
         $this->username = $username;
+
         return $this;
     }
 
@@ -79,6 +83,7 @@ class User
     public function setEmail($email)
     {
         $this->email = $email;
+
         return $this;
     }
 

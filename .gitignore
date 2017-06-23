@@ -5,3 +5,4 @@
 /docker/docker-compose.override.yml
 /.idea/
 db.sqlite
+.php_cs.cache
