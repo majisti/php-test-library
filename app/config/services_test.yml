@@ -1,29 +1,8 @@
 services:
-    app.test.helper:
-        class: Majisti\Testing\TestHelper
+    AppBundle\DataFixtures\FixturesLoader:
+        autowire: true
 
-    majisti.fixtures.cached_loader:
-        class: Majisti\Testing\Fixtures\CachedFixturesLoader
-        arguments:
-            -
-                - '@majisti.fixtures.doctrine_loader'
-                - '@majisti.fixtures.alice_loader'
-            - '@doctrine.orm.default_entity_manager'
-            - '%kernel.cache_dir%'
+    Nelmio\Alice\Persister\Doctrine:
+        arguments: ['@doctrine.orm.entity_manager']
 
-    majisti.fixtures.alice_loader:
-        class: Majisti\Testing\Fixtures\AliceFixturesLoader
-        arguments:
-            - '@hautelook_alice.doctrine.orm.fixtures_finder'
-            - '@hautelook_alice.doctrine.orm.loader_generator'
-            - '@hautelook_alice.fixtures.loader'
-            - '@hautelook_alice.alice.fixtures.loader'
-            - '@hautelook_alice.doctrine.executor.fixtures_executor'
-            - '@doctrine.orm.default_entity_manager'
-            - '@kernel'
-
-    majisti.fixtures.doctrine_loader:
-        class: Majisti\Testing\Fixtures\DoctrineFixtureLoader
-        arguments:
-            - '@test.client'
-            - '@doctrine.orm.default_entity_manager'
+    Majisti\Testing\Database\FixturesLoader: '@AppBundle\DataFixtures\FixturesLoader'

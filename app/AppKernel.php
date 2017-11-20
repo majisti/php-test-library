@@ -20,6 +20,10 @@ class AppKernel extends Kernel
             $bundles[] = new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
         }
 
+        if (in_array($this->getEnvironment(), array('test'), true)) {
+            $bundles[] = new Majisti\TestingBundle\MajistiTestingBundle();
+        }
+
         return $bundles;
     }
 

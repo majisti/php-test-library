@@ -2,12 +2,11 @@
 
 namespace Majisti\Testing\Fixtures;
 
+use Doctrine\Common\DataFixtures\ReferenceRepository;
+
 interface FixturesLoader
 {
-    /**
-     * @return array
-     */
-    public function getFixturesList();
+    public function loadFullFixtures();
 
-    public function load($append = false);
+    public function getReferenceRepository(): ReferenceRepository;
 }

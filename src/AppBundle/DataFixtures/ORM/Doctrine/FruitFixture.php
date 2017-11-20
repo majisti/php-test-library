@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\DataFixtures\ORM;
+namespace AppBundle\DataFixtures\ORM\Doctrine;
 
 use AppBundle\Entity\Fruit;
 use Doctrine\Common\DataFixtures\FixtureInterface;

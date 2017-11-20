@@ -17,7 +17,7 @@ THIS_FILE := $(lastword $(MAKEFILE_LIST))
 
 DC=docker-compose \
 	-p $(ENV)_$(DIRECTORY_NAME) \
-    -f docker-compose.yml \
+    -f docker/docker-compose.yml \
     -f docker/docker-compose.$(ENV).yml \
     -f docker/docker-compose.override.yml
 
@@ -113,6 +113,8 @@ test-component-debug:
 
 test-unit:
 	$(PHP) php vendor/phpunit/phpunit/phpunit -v tests/Unit
+	$(PHP) php vendor/phpspec/phpspec/bin/phpspec run --verbose --format dot
 
 test-unit-debug:
 	$(DC) run --rm -e XDEBUG=1 php vendor/phpunit/phpunit/phpunit -v tests/Unit
+	$(DC) run --rm -e XDEBUG=1 php vendor/phpspec/phpspec/bin/phpspec run --verbose --format dot

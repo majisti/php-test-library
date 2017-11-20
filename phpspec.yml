@@ -1,0 +1,10 @@
+suites:
+    app:
+        namespace: AppBundle
+        spec_prefix: Unit
+        spec_path: tests
+    majisti:
+        namespace: Majisti
+        spec_prefix: Unit
+        spec_path: tests
+

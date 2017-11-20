@@ -14,8 +14,8 @@
 
     <listeners>
         <listener
-            class="Majisti\Testing\TestFrameworkIntegration\PhpUnit\DatabaseHelperListener"
-            file="src/Majisti/Testing/TestFrameworkIntegration/PhpUnit/DatabaseHelperListener.php"
+            class="Majisti\Testing\TestFrameworkIntegration\PhpUnit\DatabaseCacheListener"
+            file="src/Majisti/Testing/TestFrameworkIntegration/PhpUnit/DatabaseCacheListener.php"
         />
     </listeners>
 

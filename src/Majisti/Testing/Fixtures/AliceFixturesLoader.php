@@ -2,97 +2,53 @@
 
 namespace Majisti\Testing\Fixtures;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\ReferenceRepository;
 use Hautelook\AliceBundle\Alice\DataFixtures\Fixtures\Loader as BaseAliceFixturesLoader;
-use Hautelook\AliceBundle\Alice\DataFixtures\Loader;
-use Hautelook\AliceBundle\Doctrine\DataFixtures\Executor\FixturesExecutor;
-use Hautelook\AliceBundle\Doctrine\Finder\FixturesFinder;
-use Hautelook\AliceBundle\Doctrine\Generator\LoaderGenerator;
-use Symfony\Component\HttpKernel\KernelInterface;
+use Nelmio\Alice\Persister\Doctrine;
 
-class AliceFixturesLoader implements FixturesLoader
+class AliceFixturesLoader
 {
-    /**
-     * @var FixturesFinder
-     */
-    private $fixturesFinder;
-
-    /**
-     * @var LoaderGenerator
-     */
-    private $loaderGenerator;
-
-    /**
-     * @var Loader
-     */
-    private $loader;
-
     /**
      * @var BaseAliceFixturesLoader
      */
-    private $fixturesLoader;
+    private $aliceFixturesLoader;
 
     /**
-     * @var FixturesExecutor
+     * @var Doctrine
      */
-    private $fixturesExecutor;
+    private $persister;
 
     /**
-     * @var ObjectManager
+     * @var ReferenceRepository
      */
-    private $objectManager;
+    private $referenceRepository;
 
-    /**
-     * @var KernelInterface
-     */
-    private $kernel;
-
-    public function __construct(
-        FixturesFinder $fixturesFinder,
-        LoaderGenerator $loaderGenerator,
-        Loader $loader,
-        BaseAliceFixturesLoader $fixturesLoader,
-        FixturesExecutor $fixturesExecutor,
-        ObjectManager $objectManager,
-        KernelInterface $kernel
-    ) {
-        $this->fixturesFinder = $fixturesFinder;
-        $this->loaderGenerator = $loaderGenerator;
-        $this->loader = $loader;
-        $this->fixturesLoader = $fixturesLoader;
-        $this->fixturesExecutor = $fixturesExecutor;
-        $this->objectManager = $objectManager;
-        $this->kernel = $kernel;
+    public function __construct(BaseAliceFixturesLoader $aliceFixturesLoader, Doctrine $persister)
+    {
+        $this->aliceFixturesLoader = $aliceFixturesLoader;
+        $this->persister = $persister;
     }
 
-    public function getFixturesList()
+    public function setReferenceRepository(ReferenceRepository $referenceRepository)
     {
-        return $this->fixturesFinder->getFixtures(
-            $this->kernel,
-            $this->kernel->getBundles(),
-            $this->kernel->getEnvironment()
-        );
+        $this->referenceRepository = $referenceRepository;
     }
 
-    public function load($append = false)
+    public function loadFixtureFile(string $yamlPath): void
     {
-        $fixturesList = $this->getFixturesList();
+        $this->loadAliceFixtureFileOrData($yamlPath);
+    }
 
-        //FIXME: this will not take from cache!
-        if (count($fixturesList) > 0) {
-            $this->fixturesExecutor->execute(
-                $this->objectManager,
-                $this->loaderGenerator->generate(
-                    $this->loader,
-                    $this->fixturesLoader,
-                    $this->kernel->getBundles(),
-                    $this->kernel->getEnvironment()
-                ),
-                $fixturesList,
-                $append,
-                function () {},
-                false
-            );
+    public function loadAliceFixtureFileOrData(string $filePathOrData): void
+    {
+        $objects = $this->aliceFixturesLoader->load($filePathOrData, $this->referenceRepository->getReferences());
+        $this->persister->persist($objects);
+
+        if ($this->referenceRepository) {
+            foreach ($objects as $name => $object) {
+                $this->referenceRepository->addReference($name, $object);
+            }
         }
     }
+
 }

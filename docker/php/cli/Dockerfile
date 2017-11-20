@@ -1,4 +1,6 @@
-FROM php:5.6.30
+#The tools container might be a little bit big here.
+#We should probably look into splitting this file.
+FROM php:7.1.8
 
 #dependencies
 RUN apt-get update \
@@ -22,7 +24,7 @@ RUN apt-get update \
 
 #gosu
 RUN apt-get install ca-certificates
-RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4
+RUN gpg --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4
 RUN curl -L -o /usr/local/bin/gosu -SL "https://github.com/tianon/gosu/releases/download/1.4/gosu-$(dpkg --print-architecture)" \
     && curl -L -o /usr/local/bin/gosu.asc -SL "https://github.com/tianon/gosu/releases/download/1.4/gosu-$(dpkg --print-architecture).asc" \
     && gpg --verify /usr/local/bin/gosu.asc \
@@ -37,7 +39,10 @@ RUN pecl install -o -f xdebug-2.5.4 \
 COPY php.ini /usr/local/etc/php/php.ini
 COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
-RUN mkdir -p /var/www/html
+RUN useradd --shell /bin/bash -c "" -m user
+WORKDIR /home/user
+
+RUN mkdir -p /var/www/html && mkdir /home/user/.composer
 WORKDIR /var/www/html/
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh

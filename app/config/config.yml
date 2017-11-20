@@ -5,11 +5,12 @@ framework:
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver:   pdo_sqlite
-        host:     localhost
-        port:     ~
-        path:     '%kernel.root_dir%/../var/db.sqlite'
-        charset:  UTF8
+        driver: pdo_sqlite
+        host: localhost
+        port: ~
+        dbname: db
+        path: '%kernel.project_dir%/var/db.sqlite'
+        charset: UTF8
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"

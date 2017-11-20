@@ -5,6 +5,8 @@ imports:
 framework:
     test: ~
 
+majisti_testing: ~
+
 doctrine:
     dbal:
         driver: pdo_sqlite
