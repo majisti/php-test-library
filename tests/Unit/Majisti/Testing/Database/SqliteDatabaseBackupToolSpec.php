@@ -6,7 +6,7 @@ namespace Unit\Majisti\Testing\Database;
 
 use Doctrine\DBAL\Connection as DriverConnection;
 use Doctrine\ORM\EntityManagerInterface;
-use Majisti\Testing\Filesystem\FriendlyPathBuilder;
+use Majisti\Testing\Utilities\FriendlyPathBuilder;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Filesystem\Filesystem;

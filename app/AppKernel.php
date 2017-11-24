@@ -12,7 +12,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Hautelook\AliceBundle\HautelookAliceBundle(),
-            new AppBundle\AppBundle(),
+            new AcmeBundle\AcmeBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
@@ -21,7 +21,7 @@ class AppKernel extends Kernel
         }
 
         if (in_array($this->getEnvironment(), array('test'), true)) {
-            $bundles[] = new Majisti\TestingBundle\MajistiTestingBundle();
+            $bundles[] = new Majisti\Testing\Bridge\Symfony\TestingBundle\MajistiTestingBundle();
         }
 
         return $bundles;

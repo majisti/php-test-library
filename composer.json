@@ -5,12 +5,15 @@
     "description": "Majisti's Test Library",
     "autoload": {
         "psr-4": {
-            "": ["src/"]
+            "Majisti\\": ["src/Majisti"]
         },
         "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
     },
     "autoload-dev": {
-        "psr-4": { "Tests\\": "tests/", "": "tests/" },
+        "psr-4": {
+            "AcmeBundle\\": ["src/AcmeBundle"],
+            "Tests\\": "tests/", "": "tests/"
+        },
         "files": [
             "vendor/symfony/symfony/src/Symfony/Component/VarDumper/Resources/functions/dump.php" ,
             "vendor/hamcrest/hamcrest-php/hamcrest/Hamcrest.php"

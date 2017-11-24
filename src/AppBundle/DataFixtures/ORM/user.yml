@@ -1,7 +1,0 @@
-AppBundle\Entity\User:
-    user (template):
-        username (unique): <username()>
-        email (unique): <email()>
-        profile: '@profile<current()>'
-
-    user{1..5} (extends user):

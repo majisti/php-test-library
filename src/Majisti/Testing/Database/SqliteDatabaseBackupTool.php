@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Majisti\Testing\Database;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Majisti\Testing\Filesystem\FriendlyPathBuilder;
+use Majisti\Testing\Utilities\FriendlyPathBuilder;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**

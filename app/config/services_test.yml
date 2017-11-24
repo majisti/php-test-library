@@ -1,8 +1,8 @@
 services:
-    AppBundle\DataFixtures\FixturesLoader:
+    AcmeBundle\DataFixtures\FixturesLoader:
         autowire: true
 
     Nelmio\Alice\Persister\Doctrine:
         arguments: ['@doctrine.orm.entity_manager']
 
-    Majisti\Testing\Database\FixturesLoader: '@AppBundle\DataFixtures\FixturesLoader'
+    Majisti\Testing\Database\FixturesLoader: '@AcmeBundle\DataFixtures\FixturesLoader'

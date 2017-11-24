@@ -5,10 +5,10 @@ imports:
 framework:
     test: ~
 
-majisti_testing: ~
-
 doctrine:
     dbal:
         driver: pdo_sqlite
         host: localhost
         path: '%kernel.root_dir%/../tests/_data/db.sqlite'
+
+majisti_testing: ~

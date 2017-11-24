@@ -1,6 +1,6 @@
 suites:
     app:
-        namespace: AppBundle
+        namespace: AcmeBundle
         spec_prefix: Unit
         spec_path: tests
     majisti:

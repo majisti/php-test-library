@@ -1,13 +1,13 @@
 ENV?=local
 
 ifeq ($(ENV), local)
-	SYMFONY_ENV=dev
+    SYMFONY_ENV=dev
 else ifeq ($(ENV), test)
-	SYMFONY_ENV=test
+    SYMFONY_ENV=test
 else ifeq ($(ENV), demo)
-	SYMFONY_ENV=prod
+    SYMFONY_ENV=prod
 else
-	SYMFONY_ENV=$(ENV)
+    SYMFONY_ENV=$(ENV)
 endif
 
 DIRECTORY_NAME := $(shell pwd | xargs basename | tr -cd 'A-Za-z0-9_-')
@@ -27,7 +27,7 @@ COMPOSER=$(PHP) php -n -d extension=zip.so -d memory_limit=-1 composer.phar
 all: configure composer-install init vendors-install
 database-reload: database-drop database-create schema-update fixtures-load
 lint: lint-fix
-test: test-unit test-component test-functional
+test: test-unit test-integration
 
 configure:
 	cp -n docker/docker-compose.override.yml.dist docker/docker-compose.override.yml
@@ -99,22 +99,14 @@ vendors-install-prod:
 vendors-update:
 	$(COMPOSER) update
 
-test-functional:
-	$(PHP) php vendor/phpunit/phpunit/phpunit -v tests/Functional
+test-integration:
+	$(PHP) php vendor/phpunit/phpunit/phpunit -v tests/Integration
 
-test-functional-debug:
-	$(DC) run --rm -e XDEBUG=1 php vendor/phpunit/phpunit/phpunit -v tests/Functional
-
-test-component:
-	$(PHP) php vendor/phpunit/phpunit/phpunit -v tests/Component
-
-test-component-debug:
-	$(DC) run --rm -e XDEBUG=1 php vendor/phpunit/phpunit/phpunit -v tests/Component
+test-integration-debug:
+	$(DC) run --rm -e XDEBUG=1 php vendor/phpunit/phpunit/phpunit -v tests/Integration
 
 test-unit:
-	$(PHP) php vendor/phpunit/phpunit/phpunit -v tests/Unit
 	$(PHP) php vendor/phpspec/phpspec/bin/phpspec run --verbose --format dot
 
 test-unit-debug:
-	$(DC) run --rm -e XDEBUG=1 php vendor/phpunit/phpunit/phpunit -v tests/Unit
 	$(DC) run --rm -e XDEBUG=1 php vendor/phpspec/phpspec/bin/phpspec run --verbose --format dot

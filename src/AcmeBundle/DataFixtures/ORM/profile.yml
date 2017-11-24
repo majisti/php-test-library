@@ -1,0 +1,6 @@
+AcmeBundle\Entity\Profile:
+    profile (template):
+        firstName:  <firstName()>
+        lastName: <lastName()>
+
+    profile{1..5} (extends profile):
